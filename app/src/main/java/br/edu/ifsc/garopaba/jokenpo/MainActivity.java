@@ -18,10 +18,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
-    public int jogadaPc(){
-        int n = new Random().nextInt(3)+1;
+    public int jogadaPc() {
+        int n = new Random().nextInt(3) + 1;
         ImageView imagePadrao = findViewById(R.id.imagePadrao);
-        switch (n){
+        switch (n) {
             case 1:
                 imagePadrao.setImageResource(R.drawable.pedra);
                 break;
@@ -38,17 +38,24 @@ public class MainActivity extends AppCompatActivity {
     /*
     regras de vitória, derrota ou empate
      */
-    public void verificar(int jogadaUser, int jogadaPc){
+    public void verificar(int jogadaUser, int jogadaPc) {
         TextView resultado = findViewById(R.id.textResultado);
-        // e o resto?
-        resultado.setText("Você ganhou!");
+        if (jogadaUser == 1 && jogadaPc == 2 ||
+                jogadaUser == 2 && jogadaPc == 3 ||
+                jogadaUser == 3 && jogadaPc == 1) {
+            resultado.setText("Você perdeu!");
+        } else if (jogadaUser == jogadaPc) {
+            resultado.setText("Empate!");
+        } else {
+            resultado.setText("Vitória!");
+        }
     }
 
-    public void jogar(View view){
+    public void jogar(View view) {
         String jogada = getResources().getResourceEntryName(view.getId());
         int jogadaUser = 0;
         int jogadaPc = jogadaPc();
-        switch (jogada){
+        switch (jogada) {
             case "imagePedra":
                 jogadaUser = 1;
                 Toast.makeText(this, "Você jogou pedra", Toast.LENGTH_SHORT).show();
